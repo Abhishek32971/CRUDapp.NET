@@ -5,7 +5,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Data.SqlClient;
 using System.Data;
 namespace CRUDapp
-{
+{//form1
     public partial class Form1 : Form
     {
         private string connectionString = "server=DESKTOP-JSQU9PD;user=root1;password=root2;database=CRUDapp";
@@ -15,7 +15,7 @@ namespace CRUDapp
         {
             InitializeComponent();
             userTable = new DataTable();
-            
+
             dataGridView1.DataSource = userTable;
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -112,7 +112,7 @@ namespace CRUDapp
 
         private void DeleteButton_Click(object sender, EventArgs e) // delete button which delteds all selected rows
         {
-            if (dataGridView1.SelectedRows.Count == 1) 
+            if (dataGridView1.SelectedRows.Count == 1)
             {
                 int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
 
@@ -159,7 +159,8 @@ namespace CRUDapp
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString)) { 
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
                     connection.Open();
 
                     adapter = new MySqlDataAdapter(selectQuery, connection);
@@ -182,14 +183,15 @@ namespace CRUDapp
             if (dataGridView1.SelectedRows.Count == 1) //check if a row is selected
             {
                 int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()); //Get ID from selected row
-                string name = textBox2.Text; 
+                string name = textBox2.Text;
                 int age = int.Parse(textBox3.Text);
 
                 string updateQuery = $"UPDATE UserTab SET Name = @name, Age = @age WHERE ID = @id";
 
                 try
                 {
-                    using (MySqlConnection connection = new MySqlConnection(connectionString)) { 
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
                         connection.Open();
 
                         MySqlCommand command = new MySqlCommand(updateQuery, connection);
